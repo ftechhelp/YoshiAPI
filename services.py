@@ -1,4 +1,5 @@
 import os, subprocess
+from os.path import exists
 
 class Service:
 
@@ -10,10 +11,10 @@ class Service:
         return False
 
     def serviceDetails(self, serviceName):
-        servicePath = 'cat /etc/systemd/system/' + serviceName + '.service'
+        servicePath = '/etc/systemd/system/' + serviceName + '.service'
         details = ""
-        if os.path.isfile(servicePath):
-            details = subprocess.check_output('cat /etc/systemd/system/' + serviceName + '.service', shell=True)
+        if exists(servicePath):
+            details = subprocess.check_output("cat " + servicePath, shell=True)
         else:
             details = "Service does not exist"
         
