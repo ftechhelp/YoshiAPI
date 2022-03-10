@@ -14,7 +14,7 @@ class Service:
         servicePath = '/etc/systemd/system/' + serviceName + '.service'
         details = ""
         if exists(servicePath):
-            details = subprocess.run(["cat", servicePath], capture_output=True).stdout
+            details = str(subprocess.run(["cat", servicePath], capture_output=True).stdout)
         else:
             details = "Service does not exist"
         
