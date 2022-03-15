@@ -11,10 +11,12 @@ class Service:
         return False
 
     def serviceDetails(self, serviceName):
-        servicePath = '/etc/systemd/system/' + serviceName + '.service'
+        servicePath = 'systemd/system/' + serviceName + '.service'
         details = ""
-        if exists(servicePath):
-            details = str(subprocess.run(["cat", servicePath], capture_output=True).stdout)
+        if exists('/etc/' + servicePath):
+            details = str(subprocess.run(["cat", '/etc/' + servicePath], capture_output=True).stdout)
+        elif exists('/lib/' + servicePath):
+            details = str(subprocess.run(["cat", '/lib/' + servicePath], capture_output=True).stdout)
         else:
             details = "Service does not exist"
         
